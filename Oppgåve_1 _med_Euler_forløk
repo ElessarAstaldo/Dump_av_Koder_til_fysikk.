@@ -1,0 +1,64 @@
+import matplotlib.pyplot as plt #treng ikkje np
+
+#k
+m0 = 20000 #in kg
+deltam = 200 #in kg
+vg = 250 #in bs and m/s
+dalta_t = 1 #tid
+def_t = 60 
+
+#lister
+t = list(range(0, def_t, delta_t)) 
+a = []
+v = []
+p = []
+
+#initial values
+m = m0
+v_0 = 0 
+p_0 = 0 
+
+#Brukar dette til å lage ei for-løkke. Hadde eigentleg tenkt while, men det gjorde eg i neste oppgåve (først). Så eg tenkte å gjer ein av kvar.
+for t in time:
+if m > 0
+    a_n = (vg*deltam)/m    #Går ut frå at prosessen går så lenge det er masse igjen. Ikkje heilt realistisk, men skal barre gå i 60sek.
+else: 
+     a_n = 0    #må kanskje justere kor ting går inn for f.eks vs, er ein tekstfil.
+
+v_n += a_n*delta_t
+c_n += v_n * delta_t #stjeler frå den eine modulen me nokon få legalistiske endringar.
+
+m= deltam * delta_t
+
+a.append(a_n)
+v.append(v_n)
+p.append(p_n) #legger til liste
+
+print(f"slutt-akselrasjon er lik a(60) = {a[-1]:.2f} m/s^2")
+print(f"slutt-fart er lik v(60) = {v[-1]:.2f} m/s")
+print(f"slutt-fart er lik p(60) = {p[-1]:.2f}m")
+#copypaseplottime
+plt.figure(figsize(10, 8) #har ikkje bestemt ein "standard" størrelse ennå. 
+
+plt.subplot(3, 1, 1)
+plt.title("akselrasjon")
+plt.xlabel("a(t)")
+plt.ylabel("Akselrasjon(m/s^2)")
+plt.legend()
+
+plt.subplot (3, 1, 2)
+plt.title("Fart")
+plt.xlabel("v(t)")
+plt.ylabel("Fart (m/s)")
+plt.legend()
+
+plt.subplot (3, 1, 3)
+plt.title("Posisjon")
+plt.xlabel("p(t)")
+plt.ylabel("Posisjon i meter")
+plt.legend()
+
+plt.tight_layout()
+plt.savefig("PlotEulerMForLøkke_Ug,l")
+
+
