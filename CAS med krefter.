@@ -28,4 +28,10 @@ a = a(t)
 v = v(t)
 p = p(t, C)  #Løste denne delen litt vel kronglete.
 
-print(f"posisjon p(120) ={
+print(f"posisjon p(120) = {p[-1]:.2f}m")
+print(f"akselrasjon er lik a(120) = {a[-1]:.2f} m/s^2")
+print(f"fart er lik v(120) = {v[-1]:.2f} m/s")
+
+#Så til det gode gamle
+
+plt.figure(figsize=(12, 10)
