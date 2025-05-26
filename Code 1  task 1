@@ -1,0 +1,35 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+t = np.linspace(0.01, 60.0001, 1000) #Tidsintervall, 1000 iterasjonar. Passa oss frå 0(def.mengde blir dela på 0) 
+
+#Funksjonar frå CAS
+a = 250 / (100-t) 
+v = 250*np.log(20000 / (20000 - 200*t)) #Frå Tsiskovksy
+p = 1.25 * (20000 - -200*t)*(np.log(20000 / (20000 - 200 * t))+1)
+
+print(f"Akselrasjon er lik a(60) = {a[-1]:.2f} m/s^2") #velger siste verdi, i videre refleksjon tenkar eg 2 er greit for desimal.
+print(f"Fart er lik v(60) = {v[-1]:.2f} m/s")
+print(f"Posisjon er lik p(60) = {p[-1]:.2f} m")
+
+
+#Plot
+plt.figure(figsize=(15,10)) #Dokumentet sin størrelse var kanskje liten
+
+plt.subplot(3, 1, 1)
+plt.plot(t, a, label="Akselrasjon (m/s^2), color="red"
+plt.ylabel("a(t)")
+plt.legend()
+
+plt.subplot(3, 1, 2)
+plt.plot(t, v, label="Fart (m/s)", color = "blue")
+plt.ylabel("v(t)")
+plt.legend()
+
+plt.subplot(3, 1, 3)
+plt.plot(t, p, label="posisjon (m)", color="green")
+plt.ylabel("p(t)")
+plt.legend()
+
+plt.tight_layout
+plt.savefig("Rocket_with/out_g/l_CAS") #Praktisk løsning siden VS, Th, og git ikkje liker grafar. 
