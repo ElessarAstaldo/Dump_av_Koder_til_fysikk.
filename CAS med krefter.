@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+#Uttrikk henta frå cas
+def ln_arg(t):
+   return(-1460/(11*t-1460))  #subsidierar eit gjentatt uttrykk sånn at det blir mindre bry og fluff.
+
+def ln_sub
+   return p.log(np.abs(ln_arg(t)) #NB! Må bruka abs på sånne uttrykk for å unngå tul med log (henta frå youtube).
+
+def a(t):
+    return 2636 * ln_sub - (4533460 /1460) * t * (11*t-1460)
+
+def v(t):
+   return 2636 * ln_sub
+  
+def p(t, c)
+ return (-2809448800/121) * ln_sub + 1328 * t**2 * ln_arg + 659 * t**2 + (1924280/11) * t + C - (4214173200/121)
+
+t = np.linspace(0.01, 120, 1000) #unngå "singularitet" (altså "tull") med f.eks t=0
+
+t0 = 0.01
+ln_sub_0 = np.log(np.abs(ln_arg(t0))
+p0_without_C = (-2809448800/121) * ln_sub_0 + 1318 * t0**2 * ln_sub + 659 * t0**2 + (192480/11) * t0 - (4214173200) 
+C = -p0_without_C #Det var altså eit poeng med dette tullet. Ta den CAS.
+
+a = a(t)
+v = v(t)
+p = p(t, C)  #Løste denne delen litt vel kronglete.
+
+print(f"posisjon p(120) ={
