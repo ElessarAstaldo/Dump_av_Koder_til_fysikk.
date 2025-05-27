@@ -1,56 +1,78 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-#Uttrikk henta frå cas
-def ln_arg(t):
-   return(-1460/(11*t-1460))  #subsidierar eit gjentatt uttrykk sånn at det blir mindre bry og fluff.
+# Antakelsar
+tyngdeakselerasjon = 9.81        # m/s^2
+lufttetthet = 1.225              # kg/m^3
+luftmotstandskoeff = 0.4         # drag-koeffisient
+areal = 10.0                     # m^2
+masse = 730000                   # kg
 
-def ln_sub
-   return p.log(np.abs(ln_arg(t)) #NB! Må bruka abs på sånne uttrykk for å unngå tul med log (henta frå youtube).
+# CAS-formlar
+def ln_arg(tid):
+    return -1460 / (11 * tid - 1460)
 
-def a(t):
-    return 2636 * ln_sub - (4533460 /1460) * t * (11*t-1460)
+def ln_sub(tid):
+    return np.log(np.abs(ln_arg(tid)))
 
-def v(t):
-   return 2636 * ln_sub
-  
-def p(t, c)
- return (-2809448800/121) * ln_sub + 1328 * t**2 * ln_arg + 659 * t**2 + (1924280/11) * t + C - (4214173200/121)
+def aksel_utan_krefter(tid):
+    return 2636 * ln_sub(tid) - (4533460 / 1460) * tid * (11 * tid - 1460)
 
-t = np.linspace(0.01, 120, 1000) #unngå "singularitet" (altså "tull") med f.eks t=0
+def fart_utan_krefter(tid):
+    return 2636 * ln_sub(tid)
 
-t0 = 0.01
-ln_sub_0 = np.log(np.abs(ln_arg(t0))
-p0_without_C = (-2809448800/121) * ln_sub_0 + 1318 * t0**2 * ln_sub + 659 * t0**2 + (192480/11) * t0 - (4214173200) 
-C = -p0_without_C #Det var altså eit poeng med dette tullet. Ta den CAS.
+def luftmotstand(fart):
+    return 0.5 * lufttetthet * luftmotstandskoeff * areal * fart**2 / masse
 
-a = a(t)
-v = v(t)
-p = p(t, C)  #Løste denne delen litt vel kronglete.
+# Totalt akselerasjon med gravitasjon og luftmotstand
+def akselerasjon(tid):
+    fart = fart_utan_krefter(tid)
+    return aksel_utan_krefter(tid) - tyngdeakselerasjon - luftmotstand(fart)
 
-print(f"posisjon p(120) = {p[-1]:.2f}m")
-print(f"akselrasjon er lik a(120) = {a[-1]:.2f} m/s^2")
-print(f"fart er lik v(120) = {v[-1]:.2f} m/s")
+def posisjon(tid, konstant):
+    return (-2809448800 / 121) * ln_sub(tid) + 1328 * tid**2 * ln_arg(tid) + 659 * tid**2 + (1924280 / 11) * tid + konstant - (4214173200 / 121)
 
-#Så til det gode gamle
+# Tidsskala
+tidar = np.linspace(0.01, 120, 1000)
 
-plt.figure(figsize=(12, 10))
+# Finne konstant for startposisjon
+start_tid = 0.01
+ln_sub_0 = ln_sub(start_tid)
+ln_arg_0 = ln_arg(start_tid)
+pos_utan_konstant = (-2809448800 / 121) * ln_sub_0 + 1328 * start_tid**2 * ln_arg_0 + 659 * start_tid**2 + (1924280 / 11) * start_tid - (4214173200 / 121)
+konstant = -pos_utan_konstant  # slik at posisjon(start_tid) = 0
 
-plt.subplot(3, 1, 1,)
-plt.plot(t, a, color="red", label="akselrasjon a(t)"
+# Bereknar verdiar (brukar array)
+aksel_data = akselerasjon(tidar)
+fart_data = fart_utan_krefter(tidar)
+posisjon_data = posisjon(tidar, konstant)
+
+# Utskrift
+print(f"Posisjon ved 120 s: {posisjon_data[-1]:.2f} m")
+print(f"Akselerasjon ved 120 s: {aksel_data[-1]:.2f} m/s²")
+print(f"Fart ved 120 s: {fart_data[-1]:.2f} m/s")
+
+# Plotting same procedure as every year. 
+plt.figure(figsize=(12, 10)) 
+
+plt.subplot(3, 1, 1)
+plt.plot(tidar, aksel_data, color="red", label="Akselerasjon a(t)")
 plt.xlabel("Tid (s)")
-plt.ylabel("akselrasjon (m/s^2)")
+plt.ylabel("Akselerasjon (m/s²)")
 plt.legend()
 
 plt.subplot(3, 1, 2)
-plt.plot(t, v, color="blue", label="fart v(t)")
+plt.plot(tidar, fart_data, color="blue", label="Fart v(t)")
 plt.xlabel("Tid (s)")
 plt.ylabel("Fart (m/s)")
 plt.legend()
 
-plt.subplot (3, 1, 3)
-plt.plot (t, p, color="green", label="posisjon p(t)")
+plt.subplot(3, 1, 3)
+plt.plot(tidar, posisjon_data, color="green", label="Posisjon p(t)")
 plt.xlabel("Tid (s)")
 plt.ylabel("Posisjon (m)")
 plt.legend()
+
+plt.tight_layout()
+plt.show()
 
