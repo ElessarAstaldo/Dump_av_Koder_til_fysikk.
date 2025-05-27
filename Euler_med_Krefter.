@@ -28,4 +28,50 @@ a_list = []   #Rekner ut aks. utenom, ingen initialverdi
 
 while t < t_max:
   thrust = mass_flow * u if m > abs(m0-mass_tap*t) else 0
-  Fd = 0.5 * rho * v**2 * Cd * A
+  Fd = 0.5 * rho * v**2 * Cd * A  * (-1 if v > 0, else 1) #uttrykk for luftmorstand; forutsetter kons.trykk
+  Fg = m * g
+  F_tot = thrust + Fd - Fg #Litt krøll med + og -
+
+  a = f_tot / m
+
+  v = v + (a * dt)
+  p = p + (v * dt) 
+
+  if m > abs(m0 - mass_tap * t):
+     m =  m - mass_tap * dt
+
+  t += dt
+
+   t_list.append(t)
+   v_list.append(v)
+   p_list.append(p)
+   a_list.append(a)
+#ALT I WHILE
+
+print(f"posisjon p({t_max}) = {p:.2f} m")
+print(f"Fart v({t_max}) = {v:.2f} m/s")
+print(f"Akselrasjon a({t_max}) = {a:.2f} m/s^2")
+
+#Same plotcedure as every year James
+plt.figure(figsize=(16,12))
+
+plt.subplot(3, 1, 1)
+plt.plot(t_list[:-1], a_list, color="red")
+plt.xlabel("Tid(s)")
+plot.ylabel(Akselrasjon(m/s^2)
+plt.title("Rakettens akselrasjon over tid")
+
+plt.subplot(3, 1, 2)
+plt.plot(t_list, v_list, color="pink")
+plt.xlabel("Tid(s)")
+plt.ylabel("Fart (m/s)")
+plt.title("Rakettens fart over tid")
+
+plt.subplot(3, 1, 3)
+plt.plot(t_list, p_list, color="orange")
+plt.xlabel("Tid(s)")
+plt.ylabel("Posisjon (m)")
+plt.title("Rakettens posisjon over tid")
+
+plt.tight_layout()   #Justerer sånn at plot ikkje tuller med kvarandre
+plt.savefig("En_Tano_Leibnitz")
