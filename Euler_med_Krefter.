@@ -1,0 +1,31 @@
+#Dette er "final answer", altså den koden eg trur skal funka best og me minst tull og bugs.
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+#K
+g = 9.81   #(m/s^2)
+rho = 1.225 #Me anntar havnivå luftettheit hele tiden (1.225 kg/m^3)
+Cd = 0.5  #guesstimate for aerodynamikken til ein rakett.
+A = 12.56  #guesstimate areal. Brukte 10 forrige kode, har ingen spesiell grunn. (m^2)
+u = 2636   #Fart gass (u fordi Rasmus skrivar u på alt)
+m0 = 730000 #startmasse kg
+mass_tap = #tap/forbruk/flow. Det me misster. I kg/s
+t_max = 120 #definisjonsmengde max (total tid) i s.
+dt = 0.1 #Leibnitz lister seg med steg på 0.1 (i s)
+
+#Initialverdiar
+t = 0
+m = m0
+v = 0
+p = 0
+
+#lister
+t_list = [t]
+v_list = [v]
+p_list = [p]
+a_list = []   #Rekner ut aks. utenom, ingen initialverdi
+
+while t < t_max:
+  thrust = mass_flow * u if m > abs(m0-mass_tap*t) else 0
+  Fd = 0.5 * rho * v**2 * Cd * A
