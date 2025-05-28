@@ -1,0 +1,18 @@
+print("Massen til ein gass")
+volum = float(input("Volumet av gassen")
+molarmasse = float(input("Molar masse av gassen")
+
+Avigadri = 24.5
+
+m = volum/Avigadri*molarmasse
+
+print("massen av gassen er", m)
+
+print("Fortynning")
+
+kons.1 = float(input("Konsentrasjon før fortynning")
+kons.2 = float(input("Konsentrasjon etter fortynning")
+volum_2 = float(input("Volum etter fortynning")
+
+Volum_1 = kons.2 * (volum_2/kons.1)
+print("Volumet me må ta ut av opprinneleg løsning er", volum_1)
