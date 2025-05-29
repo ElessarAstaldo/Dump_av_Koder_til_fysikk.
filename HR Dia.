@@ -1,0 +1,25 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+temp = np.linspace(40000, 2500, 500)
+lum = np.logspace(-4, 6, 500)
+fig, ac = plt.subplots(figsize=(10, 8))
+
+ax.set_xscale("log")
+ax.set_yscale("log")
+
+ax.set_xlim(40000, 2500)
+ax.set_ylim( 1e-4, 1e6)
+
+ax.set_xlabel("Temp i kelving")
+ax.set_ylabel("lum i sol")
+ax.set_title("HR")
+
+sun_temp = 5778
+sun_lun = 1
+
+ax.scatter(sun_temp, sun_lun, color="gold", s=100, edgecolor="black", label="sol")
+ax.legend()
+
+plt.grid(true, which="both", 1s="--")
+plt.show()
