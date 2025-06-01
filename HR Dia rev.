@@ -7,33 +7,40 @@ lum = np.logspace(-4, 6, 500)
 
 fig, ax = plt.subplots(figsize=(10, 8))
 
+# Log-skala og akseretning
 ax.set_xscale("log")
 ax.set_yscale("log")
-
-# Merk at HR-diagram har temperaturen synkande mot høgre
 ax.set_xlim(40000, 2500)
 ax.set_ylim(1e-4, 1e6)
 
-# Aksetitlar
+# Aksetitlar og diagramtittel
 ax.set_xlabel("Temperatur (K)")
 ax.set_ylabel("Lyskraft (i sol-luminositetar)")
 ax.set_title("Hertzsprung–Russell-diagram")
 
-# Funksjon for å legge til stjerner
+# Funksjon for å plotte stjerner
 def plot_star(temp, lum, name, color):
     ax.scatter(temp, lum, color=color, s=100, edgecolor="black", label=name)
 
-# Kjente stjerner (temperatur i Kelvin, luminositet i forhold til Sola)
-plot_star(5778, 1, "Sola", "gold")              # Gul dverg
-plot_star(9940, 25.4, "Sirius", "white")        # Kvitt hovudseriestjerne
-plot_star(3500, 126000, "Betelgeuse", "red")    # Raud superkjempe
-plot_star(12100, 120000, "Rigel", "blue")       # Blå superkjempe
-plot_star(10000, 0.012, "Sirius B", "lightgray")# Kvit dverg
+# Kjente stjerner frå ulike kategoriar
+plot_star(5778, 1, "Sola", "gold")                    # Gul dverg
+plot_star(9940, 25.4, "Sirius", "white")              # Kvitt hovudseriestjerne
+plot_star(3500, 126000, "Betelgeuse", "red")          # Raud superkjempe
+plot_star(12100, 120000, "Rigel", "blue")             # Blå superkjempe
+plot_star(10000, 0.012, "Sirius B", "lightgray")      # Kvit dverg
+
+# Nye stjerner – éin av kvar type
+plot_star(3000, 0.0005, "Barnard's Star", "orangered")   # Raud dverg
+plot_star(30000, 1_000_000, "Eta Carinae", "deepskyblue") # Hyperkjempe
+plot_star(11500, 60, "Vega", "lightblue")                 # A-type hovudserie
+plot_star(6000, 100, "Polaris", "yellowgreen")            # Gul kjempe (Cepheide)
 
 # Legg til forklaring
-ax.legend()
+ax.legend(loc="lower left", fontsize="small")
 
 # Rutemønster
 ax.grid(True, which="both", linestyle="--")
 
+plt.tight_layout()
 plt.show()
+
