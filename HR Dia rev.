@@ -10,7 +10,7 @@ fig, ax = plt.subplots(figsize=(10, 8))
 # Log-skala og akseretning
 ax.set_xscale("log")
 ax.set_yscale("log")
-ax.set_xlim(40000, 2500)
+ax.set_xlim(50000, 2500)
 ax.set_ylim(1e-4, 1e6)
 
 # Aksetitlar og diagramtittel
@@ -28,12 +28,15 @@ plot_star(9940, 25.4, "Sirius", "white")              # Kvitt hovudseriestjerne
 plot_star(3500, 126000, "Betelgeuse", "red")          # Raud superkjempe
 plot_star(12100, 120000, "Rigel", "blue")             # Blå superkjempe
 plot_star(10000, 0.012, "Sirius B", "lightgray")      # Kvit dverg
-
-# Nye stjerner – éin av kvar type
 plot_star(3000, 0.0005, "Barnard's Star", "orangered")   # Raud dverg
 plot_star(30000, 1_000_000, "Eta Carinae", "deepskyblue") # Hyperkjempe
 plot_star(11500, 60, "Vega", "lightblue")                 # A-type hovudserie
 plot_star(6000, 100, "Polaris", "yellowgreen")            # Gul kjempe (Cepheide)
+plot_star(2650, 0.00078, "EZ Aquari", "orangered")
+plot_star(6443, 5.91, "Eta Arietis", "Yellowgreen")
+plot_star(39000, 204000, "Theta Orionis C", "blue")
+plot_star(35000, 74100, "Zeta Ophiuchi", "blue")    #Temp variearar frå pol til midt
+plot_star(44000, 230000, "DH Cephei", "blue")
 
 # Legg til forklaring
 ax.legend(loc="lower left", fontsize="small")
